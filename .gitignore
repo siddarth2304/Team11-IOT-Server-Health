@@ -2,6 +2,7 @@ __pycache__/
 *.py[cod]
 .venv/
 .env.hivemq
+.env.mqtt-cloud
 infra/nodered/.config.*
 infra/nodered/*_cred.json
 infra/nodered/flows_cred.json

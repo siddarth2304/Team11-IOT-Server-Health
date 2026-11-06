@@ -10,10 +10,10 @@
   </defs>
   <rect width="1900" height="1050" fill="#ffffff"/>
   <text x="950" y="42" text-anchor="middle" class="title">IoT-Based Server &amp; IT Infrastructure Health Monitoring</text>
-  <text x="950" y="67" text-anchor="middle" class="subtitle">Two-laptop, HiveMQ Cloud, software-only closed-loop architecture · Team 11</text>
+  <text x="950" y="67" text-anchor="middle" class="subtitle">Two-laptop, EMQX Cloud, software-only closed-loop architecture · Team 11</text>
 
   <rect x="28" y="92" width="740" height="865" rx="18" class="lane"/>
-  <text x="52" y="125" class="lane-title">HIVEMQ CLOUD + LAPTOP 1 · IoT FLOW &amp; UI</text>
+  <text x="52" y="125" class="lane-title">EMQX CLOUD + LAPTOP 1 · IoT FLOW &amp; UI</text>
   <rect x="790" y="92" width="1080" height="865" rx="18" class="lane2"/>
   <text x="814" y="125" class="lane-title2">LAPTOP 2 · DATA, ANALYTICS &amp; ML</text>
 
@@ -31,7 +31,7 @@
   <g transform="translate(70 175)">
     <rect width="180" height="170" class="box"/>
     <text x="90" y="34" text-anchor="middle" class="h">MQTT Broker</text>
-    <text x="90" y="56" text-anchor="middle" class="p">HiveMQ Cloud · TLS 8883</text>
+    <text x="90" y="56" text-anchor="middle" class="p">EMQX Cloud · TLS 8883</text>
     <ellipse cx="90" cy="88" rx="42" ry="14" class="icon"/><path d="M48 88v42c0 8 19 14 42 14s42-6 42-14V88M48 108c0 8 19 14 42 14s42-6 42-14" class="icon"/>
   </g>
 

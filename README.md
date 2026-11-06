@@ -12,9 +12,10 @@ dashboard. No physical hardware is required.
   days, with normal workload and six fault families.
 - **Analytics:** traditional Gaussian NB, ensemble Random Forest, three-layer
   neural MLP, validation-only model selection, and ridge demand forecasting.
-- **IoT:** HiveMQ Cloud with authenticated TLS, Node-RED validation/routing,
+- **IoT:** EMQX Cloud Serverless with authenticated TLS, Node-RED validation/routing,
   CSV replay publisher, analytics subscriber and software actuator
-  acknowledgements. Local Mosquitto remains available as an offline fallback.
+  acknowledgements. Local Mosquitto and HiveMQ-compatible modes remain available
+  as fallbacks.
 - **Backend:** SQLite telemetry, predictions and command audit log.
 - **Dashboard:** responsive, dependency-free web UI and read-only JSON API.
 - **Advanced analytics:** deterministic health score, forecast capacity
@@ -27,27 +28,27 @@ dashboard. No physical hardware is required.
 The dataset is **synthetic, scenario-based and reproducible**. It must not be
 described as production, patient, hospital or clinical data.
 
-## One-command HiveMQ Cloud evaluation launch
+## One-command EMQX Cloud evaluation launch
 
-Create a HiveMQ Cloud cluster and copy `.env.hivemq.example` to `.env.hivemq`
-on both laptops. Enter the same cluster hostname and project credential. Start
-the other PC first:
+Create a free EMQX Serverless deployment with spend limit `0`, then copy
+`.env.mqtt-cloud.example` to `.env.mqtt-cloud` on both laptops. Enter the same
+TLS endpoint and project credential. Start the other PC first:
 
 ```bash
-./team11.sh hivemq-edge
+./team11.sh cloud-edge
 ```
 
 On the main presentation laptop run:
 
 ```bash
-TEAM11_DASHBOARD_PORT=8081 ./team11.sh hivemq-main
+TEAM11_DASHBOARD_PORT=8081 ./team11.sh cloud-main
 ```
 
 The main command creates the Python environment when needed, validates the
 dataset, rebuilds the analysis and models, runs the tests, starts the ML node
 and dashboard, publishes a class-balanced live stream, then restores a mixed
 fleet state for discussion. Use `./team11.sh local` as a one-laptop backup.
-See [the HiveMQ Cloud setup guide](docs/hivemq_cloud_setup.md) for the one-time
+See [the EMQX Cloud setup guide](docs/emqx_cloud_setup.md) for the one-time
 credential and permission steps.
 
 ## Fastest fully local demonstration
@@ -159,5 +160,5 @@ See also the [data dictionary](docs/data_dictionary.md), [dataset decision](docs
 For the distributed demonstration, use the other laptop for cloud-connected
 Node-RED, the software actuator and browser; use the main laptop for the
 dataset, training, ML inference, forecasting, SQLite and dashboard server.
-Both use HiveMQ Cloud as the shared broker. Follow the exact startup order in
+Both use EMQX Cloud as the shared broker. Follow the exact startup order in
 the [two-laptop guide](docs/two_laptop_demo.md).

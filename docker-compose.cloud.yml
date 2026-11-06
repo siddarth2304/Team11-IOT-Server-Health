@@ -1,0 +1,12 @@
+services:
+  node-red:
+    image: nodered/node-red:4.0
+    container_name: team11-node-red
+    ports:
+      - "1880:1880"
+    env_file:
+      - .env.mqtt-cloud
+    environment:
+      FLOWS: flows.cloud.json
+    volumes:
+      - ./infra/nodered:/data

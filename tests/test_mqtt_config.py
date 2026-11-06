@@ -17,17 +17,17 @@ class MQTTConfigurationTests(unittest.TestCase):
             self.assertIsNone(settings.username)
             self.assertEqual(connection_label(settings.host, settings.port), "mqtt://127.0.0.1:1883")
 
-    def test_hivemq_cloud_uses_tls_and_credentials(self):
+    def test_managed_cloud_uses_tls_and_credentials(self):
         environment = {
             "MQTT_TLS": "1",
             "MQTT_USERNAME": "team11-client",
             "MQTT_PASSWORD": "secret",
         }
         with patch.dict(os.environ, environment, clear=True):
-            settings = MQTTSettings.from_environment("cluster.hivemq.cloud", 8883)
+            settings = MQTTSettings.from_environment("deployment.emqxsl.com", 8883)
             self.assertTrue(settings.tls)
             self.assertEqual(settings.username, "team11-client")
-            self.assertEqual(connection_label(settings.host, settings.port), "mqtts://cluster.hivemq.cloud:8883")
+            self.assertEqual(connection_label(settings.host, settings.port), "mqtts://deployment.emqxsl.com:8883")
 
     def test_partial_credentials_are_rejected(self):
         with patch.dict(os.environ, {"MQTT_USERNAME": "incomplete"}, clear=True):

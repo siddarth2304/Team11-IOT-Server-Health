@@ -11,6 +11,9 @@ usage() {
   echo "  ./team11.sh hivemq-edge          # Other PC: cloud Node-RED and actuator"
   echo "  ./team11.sh hivemq-main          # Main laptop: cloud ML, dashboard and replay"
   echo "  ./team11.sh hivemq-replay ARGS   # Main laptop: publish a cloud demo/fault stream"
+  echo "  ./team11.sh cloud-edge           # Other PC: EMQX Cloud Node-RED + actuator"
+  echo "  ./team11.sh cloud-main           # Main laptop: EMQX Cloud ML + dashboard"
+  echo "  ./team11.sh cloud-replay ARGS    # Main laptop: publish an EMQX demo/fault stream"
   echo "  ./team11.sh local                # Backup: run the complete demo on one laptop"
   echo
   echo "Optional environment variables:"
@@ -18,6 +21,30 @@ usage() {
   echo "  TEAM11_DASHBOARD_PORT=8080       # Change the dashboard port"
   echo "  TEAM11_REPLAY_LIMIT=600          # Number of live messages; 0 means all"
   echo "  TEAM11_REPLAY_DELAY=0.05         # Seconds between live messages"
+}
+
+load_cloud_environment() {
+  local env_file="$task_root/.env.mqtt-cloud"
+  if [[ ! -f "$env_file" ]]; then
+    echo "Missing $env_file" >&2
+    echo "Copy .env.mqtt-cloud.example to .env.mqtt-cloud and enter the EMQX Cloud connection details." >&2
+    exit 1
+  fi
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    line="${line%$'\r'}"
+    [[ -z "$line" || "$line" == \#* ]] && continue
+    if [[ "$line" != *=* || ! "${line%%=*}" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
+      echo "Invalid entry in .env.mqtt-cloud: $line" >&2
+      exit 1
+    fi
+    export "$line"
+  done < "$env_file"
+  : "${MQTT_HOST:?MQTT_HOST is required in .env.mqtt-cloud}"
+  : "${MQTT_PORT:=8883}"
+  : "${MQTT_USERNAME:?MQTT_USERNAME is required in .env.mqtt-cloud}"
+  : "${MQTT_PASSWORD:?MQTT_PASSWORD is required in .env.mqtt-cloud}"
+  : "${MQTT_TLS:=1}"
+  export MQTT_HOST MQTT_PORT MQTT_USERNAME MQTT_PASSWORD MQTT_TLS
 }
 
 load_hivemq_environment() {
@@ -183,6 +210,36 @@ run_hivemq_replay() {
   .venv/bin/python src/replay.py --mode mqtt --host "$MQTT_HOST" --port "$MQTT_PORT" "$@"
 }
 
+run_cloud_edge() {
+  require_command docker
+  if ! docker compose version >/dev/null 2>&1; then
+    echo "Docker Compose is required. Install the Docker Compose plugin first." >&2
+    exit 1
+  fi
+  ensure_edge_dependencies
+  load_cloud_environment
+  docker compose -f docker-compose.cloud.yml --env-file .env.mqtt-cloud up -d --remove-orphans
+  docker compose -f docker-compose.cloud.yml ps
+  echo
+  echo "EMQX Cloud edge is ready: mqtts://$MQTT_HOST:$MQTT_PORT"
+  echo "Node-RED: http://127.0.0.1:1880"
+  echo "The digital-twin actuator will remain in this terminal. Press Ctrl+C to stop it."
+  exec .venv/bin/python src/actuator_simulator.py --host "$MQTT_HOST" --port "$MQTT_PORT"
+}
+
+run_cloud_main() {
+  load_cloud_environment
+  : "${TEAM11_REPLAY_DELAY:=0.15}"
+  export TEAM11_REPLAY_DELAY
+  run_main "$MQTT_HOST"
+}
+
+run_cloud_replay() {
+  load_cloud_environment
+  ensure_main_dependencies
+  .venv/bin/python src/replay.py --mode mqtt --host "$MQTT_HOST" --port "$MQTT_PORT" "$@"
+}
+
 run_edge() {
   require_command docker
   if ! docker compose version >/dev/null 2>&1; then
@@ -240,6 +297,12 @@ case "$role" in
   hivemq-replay)
     shift
     run_hivemq_replay "$@"
+    ;;
+  cloud-edge) run_cloud_edge ;;
+  cloud-main) run_cloud_main ;;
+  cloud-replay)
+    shift
+    run_cloud_replay "$@"
     ;;
   main)
     if [[ $# -ne 2 ]]; then usage; exit 2; fi

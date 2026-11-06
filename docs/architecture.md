@@ -5,7 +5,7 @@
 ```mermaid
 flowchart LR
   CSV[server_health_synthetic.csv\n80,640 rows] --> RP[Python replay publisher]
-  RP -->|TLS 8883: team11/servers/+/telemetry| MQ[(HiveMQ Cloud)]
+  RP -->|TLS 8883: team11/servers/+/telemetry| MQ[(EMQX Cloud Serverless)]
   MQ --> NR[Node-RED validation and flow processing]
   NR -->|team11/servers/+/processed| MQ
   MQ --> ML[Python analytics service]
@@ -30,7 +30,7 @@ flowchart LR
   proposed action and implements a per-server/action cooldown.
 - Consolidation and disk-clearing recommendations require operator approval.
 - The actuator is intentionally simulated and cannot modify a real server.
-- HiveMQ Cloud connections use verified TLS plus a project-only username and
+- EMQX Cloud connections use verified TLS plus a project-only username and
   password loaded from an ignored local environment file.
 
 ## MQTT topics

@@ -59,11 +59,11 @@ No physical hardware or production server is modified.
 
 ## 3 System architecture
 
-The solution separates IoT flow processing from analytics. HiveMQ Cloud is the
+The solution separates IoT flow processing from analytics. EMQX Cloud Serverless is the
 managed MQTT broker. The other PC runs Node-RED and the software actuator. The
 main laptop holds the fixed dataset, model-training pipeline, live publisher,
 analytics subscriber, SQLite database and dashboard server. Both computers
-connect independently to HiveMQ Cloud through authenticated MQTT over verified
+connect independently to EMQX Cloud through authenticated MQTT over verified
 TLS on port 8883, so they do not depend on local-network routing.
 
 The end-to-end message path is:
@@ -232,15 +232,15 @@ per-action cooldown suppresses repeated commands.
 ## 9 Software implementation
 
 Python implements simulation, feature conversion, models, policy, replay,
-storage, API and test automation. HiveMQ Cloud carries encrypted, authenticated
+storage, API and test automation. EMQX Cloud carries encrypted, authenticated
 MQTT messages. Node-RED
 provides flow validation and visible topic routing. SQLite stores immutable
 telemetry and command evidence. The dashboard uses dependency-free HTML, CSS,
 JavaScript and Canvas rendering.
 
 The repository includes one launcher with cloud and offline modes.
-`hivemq-edge` starts cloud-connected Node-RED and the actuator;
-`hivemq-main` trains and demonstrates from the presentation laptop; and `local`
+`cloud-edge` starts cloud-connected Node-RED and the actuator;
+`cloud-main` trains and demonstrates from the presentation laptop; and `local`
 provides a one-computer Mosquitto backup. The launcher supports saved-model
 reuse, custom dashboard ports, replay length and replay speed through
 environment variables.
@@ -270,9 +270,9 @@ SQLite, dashboard and digital-twin actuator.
 
 ## 12 Two-laptop demonstration
 
-After the same ignored `.env.hivemq` configuration is placed on both machines,
-the other PC starts first with `./team11.sh hivemq-edge`. The presentation
-laptop then runs `./team11.sh hivemq-main`. The main command creates dependencies when
+After the same ignored `.env.mqtt-cloud` configuration is placed on both machines,
+the other PC starts first with `./team11.sh cloud-edge`. The presentation
+laptop then runs `./team11.sh cloud-main`. The main command creates dependencies when
 needed, validates the dataset, rebuilds analytics and models, runs tests, starts
 the live services and publishes a balanced demonstration stream. A final mixed
 state leaves two normal servers, one overloaded server and one underutilized
@@ -317,5 +317,5 @@ for later real-infrastructure validation.
 1. Project dataset and source code in the Team 11 submission package.
 2. OASIS MQTT Version 5.0 specification.
 3. Node-RED documentation.
-4. HiveMQ Cloud documentation.
+4. EMQX Cloud Serverless documentation.
 5. Scikit-learn documentation for Random Forest, MLP and Ridge regression.
