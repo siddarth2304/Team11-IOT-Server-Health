@@ -1,0 +1,134 @@
+{
+  "dataset_rows": 80640,
+  "train_rows": 57600,
+  "splits": {
+    "validation": {
+      "accuracy": 0.9048611111111111,
+      "macro_f1": 0.8093067934361038,
+      "anomaly_false_alarm_rate": 0.0006269592476489029,
+      "per_class": {
+        "underutilized": {
+          "precision": 0.7989937106918239,
+          "recall": 0.9984281672430053,
+          "f1": 0.8876467300167692,
+          "support": 3181
+        },
+        "normal": {
+          "precision": 0.9983823529411765,
+          "recall": 0.8628622267412303,
+          "f1": 0.9256885737660213,
+          "support": 7868
+        },
+        "overloaded": {
+          "precision": 0.2900763358778626,
+          "recall": 0.9827586206896551,
+          "f1": 0.44793713163064836,
+          "support": 116
+        },
+        "anomalous": {
+          "precision": 0.9801136363636364,
+          "recall": 0.971830985915493,
+          "f1": 0.9759547383309761,
+          "support": 355
+        }
+      },
+      "confusion_matrix": {
+        "underutilized": {
+          "underutilized": 3176,
+          "normal": 4,
+          "overloaded": 0,
+          "anomalous": 1
+        },
+        "normal": {
+          "underutilized": 794,
+          "normal": 6789,
+          "overloaded": 279,
+          "anomalous": 6
+        },
+        "overloaded": {
+          "underutilized": 0,
+          "normal": 2,
+          "overloaded": 114,
+          "anomalous": 0
+        },
+        "anomalous": {
+          "underutilized": 5,
+          "normal": 5,
+          "overloaded": 0,
+          "anomalous": 345
+        }
+      }
+    },
+    "test": {
+      "accuracy": 0.8979166666666667,
+      "macro_f1": 0.8383436177968293,
+      "anomaly_false_alarm_rate": 0.0010773927096426647,
+      "per_class": {
+        "underutilized": {
+          "precision": 0.7866242038216561,
+          "recall": 0.9989888776541962,
+          "f1": 0.8801781737193765,
+          "support": 2967
+        },
+        "normal": {
+          "precision": 0.9986711944485457,
+          "recall": 0.8532862369118204,
+          "f1": 0.9202721088435373,
+          "support": 7927
+        },
+        "overloaded": {
+          "precision": 0.41008403361344536,
+          "recall": 1.0,
+          "f1": 0.5816448152562574,
+          "support": 244
+        },
+        "anomalous": {
+          "precision": 0.96875,
+          "recall": 0.9738219895287958,
+          "f1": 0.9712793733681463,
+          "support": 382
+        }
+      },
+      "confusion_matrix": {
+        "underutilized": {
+          "underutilized": 2964,
+          "normal": 2,
+          "overloaded": 0,
+          "anomalous": 1
+        },
+        "normal": {
+          "underutilized": 802,
+          "normal": 6764,
+          "overloaded": 350,
+          "anomalous": 11
+        },
+        "overloaded": {
+          "underutilized": 0,
+          "normal": 0,
+          "overloaded": 244,
+          "anomalous": 0
+        },
+        "anomalous": {
+          "underutilized": 2,
+          "normal": 7,
+          "overloaded": 1,
+          "anomalous": 372
+        }
+      }
+    }
+  },
+  "forecast_test": {
+    "cpu": {
+      "mae": 4.476634448378856,
+      "rmse": 5.798522269981744,
+      "r2": 0.8702009570076051,
+      "rows": 11460
+    },
+    "memory": {
+      "mae": 1.9306093574864325,
+      "rmse": 2.8829054658033284,
+      "r2": 0.939341313070033,
+      "rows": 11460
+    }
+  }
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Team 11 · Server Health Monitor</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="team-mark">11</span>
+        <div><h1>Server Health Monitor</h1><p>Infrastructure monitoring and resource management</p></div>
+      </div>
+      <div class="toolbar">
+        <label for="serverFilter">Trend scope</label>
+        <select id="serverFilter"><option value="">All servers</option></select>
+        <div class="live-status"><i></i><span>Live</span><small id="updated">Waiting for data</small></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="summary-grid" aria-label="Fleet summary">
+      <article class="summary-item"><span>Servers monitored</span><strong id="fleetCount">—</strong><small>Software-simulated nodes</small></article>
+      <article class="summary-item"><span>Normal now</span><strong id="normalCount">—</strong><small>Latest inference</small></article>
+      <article class="summary-item"><span>Need attention</span><strong id="attentionCount">—</strong><small>Overloaded or anomalous</small></article>
+      <article class="summary-item"><span>Fleet health</span><strong id="fleetHealth">—</strong><small>Deterministic score out of 100</small></article>
+      <article class="summary-item"><span>Selected model accuracy</span><strong id="accuracy">—</strong><small id="selectedModel">—</small></article>
+      <article class="summary-item"><span>Data completeness</span><strong id="dataQuality">—</strong><small>Critical telemetry fields</small></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h2>Current server state</h2><p>Latest classification and resource values for each server</p></div>
+        <small id="latestEvent">No readings</small>
+      </div>
+      <div class="table-wrap">
+        <table class="fleet-table">
+          <thead><tr><th>Server</th><th>Condition and explanation</th><th>Health</th><th>Confidence</th><th>CPU</th><th>CPU +15m</th><th>Memory</th><th>Memory +15m</th><th>Temperature</th><th>Headroom</th><th>Drift</th><th>Decision</th></tr></thead>
+          <tbody id="serverRows"></tbody>
+        </table>
+      </div>
+      <div class="monitor-strip"><span>Drift monitor <b id="driftState">—</b></span><span>Leading metric <b id="driftMetric">—</b></span><span>Average forecast headroom <b id="averageHeadroom">—</b></span><small>Rolling mean shift against the training-only baseline</small></div>
+    </section>
+
+    <section class="panel chart-panel">
+      <div class="panel-head">
+        <div><h2>Resource trend and 15-minute forecast</h2><p id="chartSubtitle">Fleet average</p></div>
+        <div class="chart-key"><div class="legend"><span class="cpu">CPU</span><span class="memory">Memory</span><span class="temperature">Temperature</span></div><small>Solid: measured · dashed: forecast</small></div>
+      </div>
+      <canvas id="trend" height="280" aria-label="CPU, memory and temperature trend chart"></canvas>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div><h2>Model evaluation</h2><p>Traditional, ensemble and neural approaches on the chronological test split</p></div>
+        <div class="inline-metrics"><span>Macro F1 <b id="macroF1">—</b></span><span>Anomaly false alarms <b id="falseAlarm">—</b></span><span>CPU forecast MAE <b id="cpuMae">—</b></span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Model family</th><th>Test accuracy</th><th>Macro precision</th><th>Macro recall</th><th>Macro F1</th><th>Training</th><th>Inference / record</th><th>Model size</th></tr></thead>
+          <tbody id="modelRows"></tbody>
+        </table>
+      </div>
+      <p class="table-note">Model selection uses validation macro-F1 only; the test split is not used for selection.</p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><h2>Closed-loop evaluation</h2><p>Decision engine and software digital-twin actuator</p></div><small>Untouched test split</small></div>
+      <div class="closed-metrics">
+        <div><span>Control effectiveness</span><strong id="controlEffect">—</strong></div>
+        <div><span>Fault scenarios</span><strong id="scenarioDetection">—</strong></div>
+        <div><span>Decision latency</span><strong id="decisionLatency">—</strong></div>
+        <div><span>Cooldown suppressions</span><strong id="cooldownCount">—</strong></div>
+        <div><span>Unnecessary commands</span><strong id="unnecessaryRate">—</strong></div>
+        <div><span>Potential saving</span><strong id="energySaving">—</strong></div>
+      </div>
+    </section>
+
+    <section class="lower-grid">
+      <article class="panel condition-panel"><div class="panel-head"><div><h2>Detected conditions</h2><p>All stored classifications</p></div></div><div id="conditionBars"></div></article>
+      <article class="panel actions-panel"><div class="panel-head"><div><h2>Recent decisions</h2><p>Audited resource-management commands</p></div></div><div id="actions"></div></article>
+    </section>
+  </main>
+
+  <footer>Team 11 · Software-only IoT server monitoring prototype · Synthetic scenario dataset</footer>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,407 @@
+{
+  "selection_rule": "Highest validation macro-F1; test data is not used for selection",
+  "selected_model": "ensemble_random_forest",
+  "features": [
+    "cpu_pct",
+    "memory_pct",
+    "disk_pct",
+    "net_in_mbps",
+    "net_out_mbps",
+    "temperature_c",
+    "power_w",
+    "load_1m",
+    "response_ms",
+    "error_rate_pct",
+    "service_up",
+    "active_sessions",
+    "hour_sin",
+    "hour_cos",
+    "weekday"
+  ],
+  "models": {
+    "traditional_gaussian_nb": {
+      "family": "Traditional machine learning",
+      "training_rows": 57600,
+      "computational_performance": {
+        "training_wall_seconds": 0.06064070900174556,
+        "training_cpu_seconds": 0.05545088799999931,
+        "process_peak_rss_mb": 285.28515625,
+        "serialized_model_mb": 0.001651763916015625
+      },
+      "validation": {
+        "accuracy": 0.9049479166666666,
+        "macro_precision": 0.7670765660953859,
+        "macro_recall": 0.9540017744228925,
+        "macro_f1": 0.8095455441516446,
+        "inference_ms_per_record": 0.0005746658852482748,
+        "per_class": {
+          "underutilized": {
+            "precision": 0.7989937106918239,
+            "recall": 0.9984281672430053,
+            "f1": 0.8876467300167692,
+            "support": 3181
+          },
+          "normal": {
+            "precision": 0.9983825907954712,
+            "recall": 0.8629893238434164,
+            "f1": 0.9257618106210376,
+            "support": 7868
+          },
+          "overloaded": {
+            "precision": 0.29081632653061223,
+            "recall": 0.9827586206896551,
+            "f1": 0.44881889763779526,
+            "support": 116
+          },
+          "anomalous": {
+            "precision": 0.9801136363636364,
+            "recall": 0.971830985915493,
+            "f1": 0.9759547383309759,
+            "support": 355
+          }
+        },
+        "confusion_matrix": {
+          "underutilized": {
+            "underutilized": 3176,
+            "normal": 4,
+            "overloaded": 0,
+            "anomalous": 1
+          },
+          "normal": {
+            "underutilized": 794,
+            "normal": 6790,
+            "overloaded": 278,
+            "anomalous": 6
+          },
+          "overloaded": {
+            "underutilized": 0,
+            "normal": 2,
+            "overloaded": 114,
+            "anomalous": 0
+          },
+          "anomalous": {
+            "underutilized": 5,
+            "normal": 5,
+            "overloaded": 0,
+            "anomalous": 345
+          }
+        }
+      },
+      "test": {
+        "accuracy": 0.8979166666666667,
+        "macro_precision": 0.7910323579709118,
+        "macro_recall": 0.9565242760237032,
+        "macro_f1": 0.8383436177968293,
+        "inference_ms_per_record": 0.0004575814238528943,
+        "per_class": {
+          "underutilized": {
+            "precision": 0.7866242038216561,
+            "recall": 0.9989888776541962,
+            "f1": 0.8801781737193763,
+            "support": 2967
+          },
+          "normal": {
+            "precision": 0.9986711944485457,
+            "recall": 0.8532862369118204,
+            "f1": 0.9202721088435374,
+            "support": 7927
+          },
+          "overloaded": {
+            "precision": 0.41008403361344536,
+            "recall": 1.0,
+            "f1": 0.5816448152562574,
+            "support": 244
+          },
+          "anomalous": {
+            "precision": 0.96875,
+            "recall": 0.9738219895287958,
+            "f1": 0.9712793733681462,
+            "support": 382
+          }
+        },
+        "confusion_matrix": {
+          "underutilized": {
+            "underutilized": 2964,
+            "normal": 2,
+            "overloaded": 0,
+            "anomalous": 1
+          },
+          "normal": {
+            "underutilized": 802,
+            "normal": 6764,
+            "overloaded": 350,
+            "anomalous": 11
+          },
+          "overloaded": {
+            "underutilized": 0,
+            "normal": 0,
+            "overloaded": 244,
+            "anomalous": 0
+          },
+          "anomalous": {
+            "underutilized": 2,
+            "normal": 7,
+            "overloaded": 1,
+            "anomalous": 372
+          }
+        }
+      }
+    },
+    "ensemble_random_forest": {
+      "family": "Ensemble machine learning",
+      "training_rows": 57600,
+      "computational_performance": {
+        "training_wall_seconds": 2.6628303170000436,
+        "training_cpu_seconds": 25.067238054999997,
+        "process_peak_rss_mb": 338.53515625,
+        "serialized_model_mb": 2.3673276901245117
+      },
+      "validation": {
+        "accuracy": 0.9988715277777778,
+        "macro_precision": 0.9993537224978376,
+        "macro_recall": 0.9893941233608547,
+        "macro_f1": 0.994296397328334,
+        "inference_ms_per_record": 0.0080177703994069,
+        "per_class": {
+          "underutilized": {
+            "precision": 0.9984306340238543,
+            "recall": 1.0,
+            "f1": 0.9992147008010052,
+            "support": 3181
+          },
+          "normal": {
+            "precision": 0.9989842559674962,
+            "recall": 1.0,
+            "f1": 0.9994918699186992,
+            "support": 7868
+          },
+          "overloaded": {
+            "precision": 1.0,
+            "recall": 0.9913793103448276,
+            "f1": 0.9956709956709957,
+            "support": 116
+          },
+          "anomalous": {
+            "precision": 1.0,
+            "recall": 0.9661971830985916,
+            "f1": 0.9828080229226361,
+            "support": 355
+          }
+        },
+        "confusion_matrix": {
+          "underutilized": {
+            "underutilized": 3181,
+            "normal": 0,
+            "overloaded": 0,
+            "anomalous": 0
+          },
+          "normal": {
+            "underutilized": 0,
+            "normal": 7868,
+            "overloaded": 0,
+            "anomalous": 0
+          },
+          "overloaded": {
+            "underutilized": 0,
+            "normal": 1,
+            "overloaded": 115,
+            "anomalous": 0
+          },
+          "anomalous": {
+            "underutilized": 5,
+            "normal": 7,
+            "overloaded": 0,
+            "anomalous": 343
+          }
+        }
+      },
+      "test": {
+        "accuracy": 0.9933159722222222,
+        "macro_precision": 0.9529723212900804,
+        "macro_recall": 0.9470463109539815,
+        "macro_f1": 0.9465765313661736,
+        "inference_ms_per_record": 0.007954671875154418,
+        "per_class": {
+          "underutilized": {
+            "precision": 0.9993259184361307,
+            "recall": 0.9993259184361307,
+            "f1": 0.9993259184361307,
+            "support": 2967
+          },
+          "normal": {
+            "precision": 0.9972323562712291,
+            "recall": 1.0,
+            "f1": 0.9986142605190225,
+            "support": 7927
+          },
+          "overloaded": {
+            "precision": 0.8153310104529616,
+            "recall": 0.9590163934426229,
+            "f1": 0.8813559322033898,
+            "support": 244
+          },
+          "anomalous": {
+            "precision": 1.0,
+            "recall": 0.8298429319371727,
+            "f1": 0.9070100143061517,
+            "support": 382
+          }
+        },
+        "confusion_matrix": {
+          "underutilized": {
+            "underutilized": 2965,
+            "normal": 2,
+            "overloaded": 0,
+            "anomalous": 0
+          },
+          "normal": {
+            "underutilized": 0,
+            "normal": 7927,
+            "overloaded": 0,
+            "anomalous": 0
+          },
+          "overloaded": {
+            "underutilized": 0,
+            "normal": 10,
+            "overloaded": 234,
+            "anomalous": 0
+          },
+          "anomalous": {
+            "underutilized": 2,
+            "normal": 10,
+            "overloaded": 53,
+            "anomalous": 317
+          }
+        }
+      }
+    },
+    "deep_mlp": {
+      "family": "Deep learning (three-hidden-layer MLP)",
+      "training_rows": 32000,
+      "computational_performance": {
+        "training_wall_seconds": 4.933546854001179,
+        "training_cpu_seconds": 39.014205812,
+        "process_peak_rss_mb": 342.86328125,
+        "serialized_model_mb": 0.08734130859375
+      },
+      "validation": {
+        "accuracy": 0.96328125,
+        "macro_precision": 0.8021463960489801,
+        "macro_recall": 0.9295500053239296,
+        "macro_f1": 0.8455393839113795,
+        "inference_ms_per_record": 0.001256413802113659,
+        "per_class": {
+          "underutilized": {
+            "precision": 0.9491421568627451,
+            "recall": 0.9739075762338887,
+            "f1": 0.9613653995345229,
+            "support": 3181
+          },
+          "normal": {
+            "precision": 0.992562630480167,
+            "recall": 0.9668276563294357,
+            "f1": 0.9795261395827968,
+            "support": 7868
+          },
+          "overloaded": {
+            "precision": 0.5065502183406113,
+            "recall": 1.0,
+            "f1": 0.672463768115942,
+            "support": 116
+          },
+          "anomalous": {
+            "precision": 0.7603305785123967,
+            "recall": 0.7774647887323943,
+            "f1": 0.7688022284122563,
+            "support": 355
+          }
+        },
+        "confusion_matrix": {
+          "underutilized": {
+            "underutilized": 3098,
+            "normal": 50,
+            "overloaded": 0,
+            "anomalous": 33
+          },
+          "normal": {
+            "underutilized": 137,
+            "normal": 7607,
+            "overloaded": 70,
+            "anomalous": 54
+          },
+          "overloaded": {
+            "underutilized": 0,
+            "normal": 0,
+            "overloaded": 116,
+            "anomalous": 0
+          },
+          "anomalous": {
+            "underutilized": 29,
+            "normal": 7,
+            "overloaded": 43,
+            "anomalous": 276
+          }
+        }
+      },
+      "test": {
+        "accuracy": 0.9645833333333333,
+        "macro_precision": 0.855854443385018,
+        "macro_recall": 0.9078663066966732,
+        "macro_f1": 0.8679184731026255,
+        "inference_ms_per_record": 0.0008991902777526977,
+        "per_class": {
+          "underutilized": {
+            "precision": 0.9589356110381078,
+            "recall": 0.9838220424671386,
+            "f1": 0.9712194310430877,
+            "support": 2967
+          },
+          "normal": {
+            "precision": 0.9886845827439887,
+            "recall": 0.96997603128548,
+            "f1": 0.9792409577177789,
+            "support": 7927
+          },
+          "overloaded": {
+            "precision": 0.6111111111111112,
+            "recall": 0.9918032786885246,
+            "f1": 0.75625,
+            "support": 244
+          },
+          "anomalous": {
+            "precision": 0.8646864686468647,
+            "recall": 0.6858638743455497,
+            "f1": 0.7649635036496351,
+            "support": 382
+          }
+        },
+        "confusion_matrix": {
+          "underutilized": {
+            "underutilized": 2919,
+            "normal": 34,
+            "overloaded": 0,
+            "anomalous": 14
+          },
+          "normal": {
+            "underutilized": 123,
+            "normal": 7689,
+            "overloaded": 88,
+            "anomalous": 27
+          },
+          "overloaded": {
+            "underutilized": 0,
+            "normal": 2,
+            "overloaded": 242,
+            "anomalous": 0
+          },
+          "anomalous": {
+            "underutilized": 2,
+            "normal": 52,
+            "overloaded": 66,
+            "anomalous": 262
+          }
+        }
+      }
+    }
+  }
+}

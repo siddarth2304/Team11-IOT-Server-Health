@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env.hivemq
+infra/nodered/.config.*
+infra/nodered/*_cred.json
+infra/nodered/flows_cred.json
+infra/nodered/.flows.json.backup
+.ppt-build/

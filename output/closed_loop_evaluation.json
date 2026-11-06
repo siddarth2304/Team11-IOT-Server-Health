@@ -1,0 +1,27 @@
+{
+  "scope": "Untouched chronological test split; software digital-twin actuator only",
+  "test_messages": 11520,
+  "commands_issued": 746,
+  "commands_per_1000_messages": 64.75694444444444,
+  "command_distribution": {
+    "candidate_for_consolidation": 594,
+    "isolate_process_and_redistribute": 2,
+    "restart_service": 13,
+    "redistribute_or_start_standby": 71,
+    "inspect_and_redistribute": 43,
+    "rate_limit_and_inspect_network": 9,
+    "clear_disk_and_alert": 2,
+    "increase_cooling_and_alert": 12
+  },
+  "cooldown_suppressions": 2296,
+  "unnecessary_command_rate_on_normal_rows": 0.0,
+  "operator_approval_commands": 596,
+  "simulated_control_effectiveness": 1.0,
+  "mean_decision_latency_ms": 0.016512104280271465,
+  "p95_decision_latency_ms": 0.01864851376941109,
+  "fault_scenarios_detected": 6,
+  "fault_scenarios_total": 6,
+  "mean_fault_response_minutes": 1.0,
+  "estimated_energy_saving_kwh": 2.246848800000002,
+  "energy_assumption": "35% of per-minute server power is avoidable during ground-truth underutilized intervals"
+}
