@@ -14,7 +14,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs" / "project_report.md"
-OUTPUT = ROOT / "artifacts" / "final" / "Team11_Server_Health_Project_Report.docx"
+OUTPUT = ROOT / "artifacts" / "final" / "Team11_Server_Health_Project_Report_EMQX.docx"
 ARCHITECTURE = ROOT / "docs" / "team11_architecture.png"
 DASHBOARD = ROOT / "docs" / "dashboard_screenshot.png"
 

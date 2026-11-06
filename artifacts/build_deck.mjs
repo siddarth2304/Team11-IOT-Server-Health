@@ -19,7 +19,7 @@ const ROOT = "/home/sahith-siddarth/Documents/ChatGPT/IOT";
 const BUILD = path.join(ROOT, ".ppt-build");
 const PREVIEWS = path.join(BUILD, "previews");
 const DRAFT = path.join(BUILD, "Team11_Server_Health_Presentation_draft.pptx");
-const FINAL = path.join(ROOT, "artifacts/final/Team11_Server_Health_Presentation_revised.pptx");
+const FINAL = path.join(ROOT, "artifacts/final/Team11_Server_Health_Presentation_EMQX.pptx");
 const SKILL_DIR = "/home/sahith-siddarth/.codex/plugins/cache/openai-primary-runtime/presentations/26.1105.12137/skills/presentations";
 const PYTHON = "/home/sahith-siddarth/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3";
 process.env.RUNTIME_NODE_MODULES = "/home/sahith-siddarth/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules";
@@ -115,7 +115,7 @@ const presentation = Presentation.create({ slideSize: { width: 1280, height: 720
   line(slide, 68, 54, 140, 5, C.teal);
   text(slide, "TEAM 11 · IoT MINI PROJECT", 68, 76, 520, 30, { size: 14, bold: true, color: C.teal });
   text(slide, "Server and IT Infrastructure\nHealth Monitoring", 68, 150, 780, 150, { size: 49, bold: true, color: C.text });
-  text(slide, "Software-only sensing, MQTT communication, machine learning, forecasting and safe closed-loop action", 70, 326, 730, 80, { size: 21, color: C.muted });
+  text(slide, "Software-only sensing, secure cloud MQTT, machine learning, forecasting and safe closed-loop action", 70, 326, 730, 80, { size: 21, color: C.muted });
   line(slide, 70, 442, 660, 2, C.line);
   text(slide, "B.Tech CSE · Semester 7", 70, 466, 380, 34, { size: 18, bold: true, color: C.navy });
   text(slide, "Team members and roll numbers: add before submission", 70, 506, 600, 34, { size: 16, color: C.muted });
@@ -125,8 +125,8 @@ const presentation = Presentation.create({ slideSize: { width: 1280, height: 720
   line(slide, 938, 316, 174, 2, C.line);
   text(slide, "80,640", 936, 342, 180, 48, { size: 34, bold: true, color: C.teal, align: "center" });
   text(slide, "one-minute readings", 925, 394, 200, 30, { size: 15, color: C.muted, align: "center" });
-  text(slide, "99.33%", 936, 452, 180, 42, { size: 30, bold: true, color: C.green, align: "center" });
-  text(slide, "selected-model accuracy", 915, 496, 220, 30, { size: 14, color: C.muted, align: "center" });
+  text(slide, "99.33%", 936, 446, 180, 42, { size: 30, bold: true, color: C.green, align: "center" });
+  text(slide, "selected-model accuracy", 915, 486, 220, 24, { size: 14, color: C.muted, align: "center" });
 }
 
 // 2. Problem and objectives
@@ -155,11 +155,11 @@ const presentation = Presentation.create({ slideSize: { width: 1280, height: 720
   slide.images.add({
     blob: bytes,
     contentType: "image/png",
-    alt: "Two-laptop MQTT, Node-RED, analytics and control architecture",
+    alt: "Two-laptop EMQX Cloud MQTT, Node-RED, analytics and control architecture",
     fit: "contain",
     position: { left: 92, top: 168, width: 1096, height: 442 },
   });
-  text(slide, "Other PC: Mosquitto + Node-RED + actuator", 80, 646, 500, 25, { size: 14, bold: true, color: C.teal });
+  text(slide, "Other PC: Node-RED + actuator via EMQX Cloud", 80, 646, 520, 25, { size: 14, bold: true, color: C.teal });
   text(slide, "Main laptop: data + ML + database + dashboard", 700, 646, 500, 25, { size: 14, bold: true, color: C.navy, align: "right" });
 }
 
@@ -359,7 +359,7 @@ const presentation = Presentation.create({ slideSize: { width: 1280, height: 720
   metric(slide, "fault families found", "6 / 6", 835, 365, 140, C.green);
   metric(slide, "cooldown suppressions", "2,296", 1000, 365, 140, C.teal);
   text(slide, "Mean policy latency: 0.017 ms", 835, 494, 300, 28, { size: 16, bold: true, color: C.text });
-  text(slide, "9 automated tests pass", 835, 526, 300, 28, { size: 16, bold: true, color: C.green });
+  text(slide, "12 automated tests pass", 835, 526, 300, 28, { size: 16, bold: true, color: C.green });
   text(slide, "Energy potential: 2.25 kWh under a documented simulation assumption—not a production claim.", 70, 612, 1080, 46, { size: 16, color: C.orange });
 }
 
@@ -369,19 +369,19 @@ const presentation = Presentation.create({ slideSize: { width: 1280, height: 720
   shape(slide, 70, 174, 520, 200, C.white, C.line, true);
   text(slide, "OTHER PC · run first", 102, 204, 450, 28, { size: 16, bold: true, color: C.teal });
   shape(slide, 102, 252, 456, 62, C.navy, "none", true);
-  text(slide, "./team11.sh edge", 122, 267, 416, 32, { size: 23, bold: true, color: C.white });
-  text(slide, "Mosquitto · Node-RED · digital-twin actuator", 102, 329, 450, 26, { size: 14, color: C.muted });
+  text(slide, "./team11.sh cloud-edge", 122, 267, 416, 32, { size: 22, bold: true, color: C.white });
+  text(slide, "Node-RED · EMQX TLS · digital-twin actuator", 102, 329, 450, 26, { size: 14, color: C.muted });
   shape(slide, 620, 174, 590, 200, C.white, C.line, true);
   text(slide, "MAIN LAPTOP · training + evaluation + demo", 652, 204, 520, 28, { size: 16, bold: true, color: C.navy });
   shape(slide, 652, 252, 526, 62, C.teal, "none", true);
-  text(slide, "./team11.sh main OTHER_PC_IP", 670, 267, 490, 32, { size: 21, bold: true, color: C.white });
+  text(slide, "./team11.sh cloud-main", 670, 267, 490, 32, { size: 22, bold: true, color: C.white });
   text(slide, "Dataset checks · analysis · models · tests · dashboard · balanced stream", 652, 329, 520, 26, { size: 14, color: C.muted });
   text(slide, "What to demonstrate", 70, 420, 300, 30, { size: 22, bold: true, color: C.text });
   labelBand(slide, "1 · Architecture", "Show Node-RED processing and MQTT topics on the other PC.", 70, 470, 330, C.blue);
   labelBand(slide, "2 · Analytics", "Show model metrics, 15-minute forecast, health score and explanation.", 445, 470, 350, C.teal);
   labelBand(slide, "3 · Closed loop", "Replay mixed states; point out command, cooldown and actuator acknowledgement.", 835, 470, 360, C.green);
   shape(slide, 70, 608, 1140, 48, C.pale, "none", true);
-  text(slide, "Backup on one laptop:  ./team11.sh local     Dashboard: http://127.0.0.1:8080", 92, 620, 1096, 28, { size: 16, bold: true, color: C.navy, align: "center" });
+  text(slide, "Cloud dashboard: http://127.0.0.1:8081     Offline backup: ./team11.sh local", 92, 620, 1096, 28, { size: 16, bold: true, color: C.navy, align: "center" });
 }
 
 await fs.mkdir(PREVIEWS, { recursive: true });
@@ -422,7 +422,7 @@ const result = await finalizePresentation({
   requiredNativeTableOwnerSlides: [],
   fontPolicy: { basis: "design", families: [FONT, "Arial"] },
   verifyArtifactToolImport: true,
-  receiptPath: path.join(stagingDir, "Team11_Server_Health_Presentation_revised.validation.json"),
+  receiptPath: path.join(stagingDir, "Team11_Server_Health_Presentation_EMQX.validation.json"),
 });
 
 console.log(JSON.stringify({ final: FINAL, draft: DRAFT, validation: result }, null, 2));
